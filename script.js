@@ -12,6 +12,8 @@ const indicator = document.querySelector("[data-indicator]");
 const generateBtn = document.querySelector(".generateButton");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+const sound = document.querySelector('#sound');
+const sound1 = document.querySelector('#sound1');
 
 
 //initially
@@ -30,7 +32,7 @@ function handleSlider() {
     //or kuch bhi karna chahiye ? - HW
     const min = inputSlider.min;
     const max = inputSlider.max;
-    inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
+    inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%";
 }
 
 function setIndicator(color) {
@@ -92,6 +94,14 @@ async function copyContent() {
     }
     //to make copy wala span visible
     copyMsg.classList.add("active");
+
+    //copy content
+    try {
+        sound1.currentTime = 0; // Rewind the sound to the beginning
+        sound1.play(); // Play the sound           
+    } catch (error) {
+        console.log(error);
+    }
 
     setTimeout( () => {
         copyMsg.classList.remove("active");
@@ -214,3 +224,15 @@ generateBtn.addEventListener('click', () => {
     //calculate strength
     calcStrength();
 });
+
+
+inputSlider.addEventListener('input', () => {
+
+        try {
+            sound.currentTime = 4; // Rewind the sound to the beginning
+            sound.play(); // Play the sound           
+        } catch (error) {
+            console.log(error);
+        }
+    });
+    
